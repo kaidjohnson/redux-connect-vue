@@ -8,14 +8,13 @@ cache:
 jobs:
   include:
   - stage: lint
-    script: eslint './src/**/*.js'
+    script: npm run lint
   - stage: test
     script: jest --coverage --coverageReporters=text-lcov | coveralls
   - stage: build
-    script: webpack
+    script: npm run build
   - stage: release
     if: tag IS present
-    script: npm run build
     deploy:
       provider: npm
       email: "$NPM_EMAIL"
