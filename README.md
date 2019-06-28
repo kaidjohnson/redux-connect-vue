@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/kaidjohnson/redux-connect-vue.svg?branch=master)](https://travis-ci.org/kaidjohnson/redux-connect-vue) 
+[![Coverage Status](https://coveralls.io/repos/github/kaidjohnson/redux-connect-vue/badge.svg?branch=master)](https://coveralls.io/github/kaidjohnson/redux-connect-vue?branch=master)
+
 # redux-connect-vue
 
 A tiny Vue plugin that connects components with Redux. 
