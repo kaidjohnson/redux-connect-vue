@@ -1,0 +1,36 @@
+{
+  "name": "redux-connect-vue",
+  "version": "0.0.1",
+  "description": "Tiny Vue plugin that connects components with Redux state",
+  "files": [
+    "dist/redux-connect-vue.min.js",
+    "src/index.js"
+  ],
+  "main": "dist/redux-connect-vue.min.js",
+  "module": "src/index.js",
+  "scripts": {
+    "build": "webpack",
+    "lint": "eslint './src/**/*.js'",
+    "test": "jest",
+    "tdd": "jest --watch"
+  },
+  "author": "kaidjohnson@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "7.4.5",
+    "@babel/preset-env": "7.4.5",
+    "@vue/test-utils": "1.0.0-beta.28",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "24.8.0",
+    "eslint": "6.0.1",
+    "eslint-plugin-jest": "22.7.1",
+    "eslint-plugin-vue": "5.2.3",
+    "jest": "24.8.0",
+    "redux": "4.0.1",
+    "reselect": "4.0.0",
+    "vue": "2.6.10",
+    "vue-template-compiler": "2.6.10",
+    "webpack": "4.35.0",
+    "webpack-cli": "3.3.5"
+  }
+}
