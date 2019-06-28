@@ -6,9 +6,20 @@ cache:
   - "$HOME/.npm"
 jobs:
   include:
-    - stage: test
-      node_js: node
-      script: jest --coverage --coverageReporters=text-lcov | coveralls
-    - stage: build
-      node_js: node
-      script: webpack
+  - stage: test
+    node_js: "10"
+    script: jest --coverage --coverageReporters=text-lcov | coveralls
+  - stage: build
+    node_js: "10"
+    script: webpack
+  - stage: release
+    if: tag IS present
+    node_js: "10"
+    script: npm run build
+    deploy:
+      provider: npm
+      email: "$NPM_EMAIL"
+      api_key: "$NPM_TOKEN"
+      skip_cleanup: true
+      on:
+        tags: true
