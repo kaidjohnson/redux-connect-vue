@@ -1,8 +1,8 @@
 [![npm version](https://badge.fury.io/js/redux-connect-vue.svg)](https://badge.fury.io/js/redux-connect-vue)
-[![Build Status](https://travis-ci.org/kaidjohnson/redux-connect-vue.svg?branch=master)](https://travis-ci.org/kaidjohnson/redux-connect-vue)
-[![Coverage Status](https://coveralls.io/repos/github/kaidjohnson/redux-connect-vue/badge.svg?branch=master)](https://coveralls.io/github/kaidjohnson/redux-connect-vue?branch=master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/e84db5d5c2cd53e07c3e/maintainability)](https://codeclimate.com/github/kaidjohnson/redux-connect-vue/maintainability)
 [![Dependency Status](https://david-dm.org/kaidjohnson/redux-connect-vue/dev-status.svg)](https://david-dm.org/kaidjohnson/redux-connect-vue?type=dev)
+[![Build Status](https://travis-ci.org/kaidjohnson/redux-connect-vue.svg?branch=master)](https://travis-ci.org/kaidjohnson/redux-connect-vue)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e84db5d5c2cd53e07c3e/test_coverage)](https://codeclimate.com/github/kaidjohnson/redux-connect-vue/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e84db5d5c2cd53e07c3e/maintainability)](https://codeclimate.com/github/kaidjohnson/redux-connect-vue/maintainability)
 
 # redux-connect-vue
 
