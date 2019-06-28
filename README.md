@@ -1,16 +1,17 @@
+[![npm version](https://badge.fury.io/js/redux-connect-vue.svg)](https://badge.fury.io/js/redux-connect-vue)
 [![Build Status](https://travis-ci.org/kaidjohnson/redux-connect-vue.svg?branch=master)](https://travis-ci.org/kaidjohnson/redux-connect-vue)
 [![Coverage Status](https://coveralls.io/repos/github/kaidjohnson/redux-connect-vue/badge.svg?branch=master)](https://coveralls.io/github/kaidjohnson/redux-connect-vue?branch=master)
 [![Dependency Status](https://david-dm.org/kaidjohnson/redux-connect-vue/dev-status.svg)](https://david-dm.org/kaidjohnson/redux-connect-vue?type=dev)
 
 # redux-connect-vue
 
-A tiny Vue plugin that connects components with Redux. 
+A tiny Vue plugin that connects components with Redux.
 
 No HOCs. No complex API. No dependencies. Just connect and go!
 
-- Simple: 60 lines code.
-- Tiny: < 275b gzipped.
-- Flexible: mapStateToProps and mapDispatchToProps are configurable via plugin options.
+- Simple: < 60 lines code.
+- Tiny: < 0.3 KB gzipped.
+- Flexible: Configurable api via Vue plugin options.
 
 New to Redux? [Start Here](https://redux.js.org/introduction/getting-started)
 
@@ -18,7 +19,21 @@ New to Redux? [Start Here](https://redux.js.org/introduction/getting-started)
 
 `npm install redux-connect-vue`
 
-## Standard Usage
+## API
+
+### Vue Plugin Options
+
+- store (required): Redux store (or any other store object that has getState, dispatch, and subscribe methods)
+- mapDispatchToStateFactory (optional): Factory function that receives the supplied _mapStateToProps_ and returns a function that receives _state_ and returns an _{Object}_ of props. Defaults to an identity function.
+- mapDispatchToPropsFactory (optional): Factory function that receives the supplied _mapDispatchToProps_ and returns a function that receives _dispatch_ and returns an _{Object}_ of actions. Defaults to an identity function.
+
+### connect(_mapStateToProps_, _mapDispatchToProps_)
+
+- mapStateToProps: Argument that gets passed to _mapStateToPropsFactory_. Binds to component _$data_ (available on the vm directly).
+- mapDispatchToProps: Argument that gets passed to _mapDispatchToPropsFactory_. Binds to component _$actions_ (available at _vm.$actions_).
+- returns a function that receives the Vue component configuration.
+
+## Standard Example
 
 Set up a Redux store:
 
@@ -64,14 +79,14 @@ export default connect(state, actions)({
 </script>
 ```
 
-## With [bindActionCreators](https://redux.js.org/api/bindactioncreators)
+## Example using [bindActionCreators](https://redux.js.org/api/bindactioncreators) as mapDispatchToPropsFactory
 
 ```
 import { bindActionCreators } from 'redux';
 import ReduxConnectVue from 'redux-connect-vue';
 import store from './store.js';
 
-Vue.use(ReduxConnectVue, { 
+Vue.use(ReduxConnectVue, {
   store,
   mapDispatchToPropsFactory: (actionCreators) => (dispatch) => bindActionCreators(actionCreators, dispatch)
 });
@@ -97,7 +112,7 @@ export default connect(state, actions)({
 </script>
 ```
 
-## With [Reselect](https://github.com/reduxjs/reselect)
+## Example using createStructuredSelector from [Reselect](https://github.com/reduxjs/reselect) as mapStateToPropsFactory
 
 ```
 import { bindActionCreators } from 'redux';
@@ -105,7 +120,7 @@ import { createStructuredSelector } from 'reselect';
 import ReduxConnectVue from 'redux-connect-vue';
 import store from './store.js';
 
-Vue.use(ReduxConnectVue, { 
+Vue.use(ReduxConnectVue, {
   store,
   mapDispatchToPropsFactory: (actionCreators) => (dispatch) => bindActionCreators(actionCreators, dispatch),
   mapStateToPropsFactory: createStructuredSelector
