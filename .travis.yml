@@ -18,9 +18,11 @@ jobs:
     after_script:
     - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
   - stage: build
+    if: tag NOT present
     script: npm run build
   - stage: release
     if: tag IS present
+    script: npm run build
     deploy:
       provider: npm
       email: "$NPM_EMAIL"
