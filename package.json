@@ -1,6 +1,6 @@
 {
   "name": "redux-connect-vue",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "A tiny Vue plugin that connects components with Redux",
   "keywords": [
     "redux",
