@@ -8,6 +8,8 @@ No HOCs. No complex API. No dependencies. Just connect and go!
 - Tiny: < 275b gzipped.
 - Flexible: mapStateToProps and mapDispatchToProps are configurable via plugin options.
 
+New to Redux? [Start Here](https://redux.js.org/introduction/getting-started)
+
 ## Installation
 
 `npm install redux-connect-vue`
@@ -141,4 +143,4 @@ There are a lot of options out there that each do similar things, in case you're
 - [redux-vue-connect](https://github.com/itsazzad/redux-vue-connect) - HOC connector
 - [vue-redux-connect](https://github.com/peerhenry/vue-redux-connect) - A variation on redux-vue-connect
 - [revux](https://github.com/edvincandon/revux) - inspired by revue
-- [redux-vuex](https://raw.githubusercontent.com/alexander-heimbuch/redux-vuex) - slightly different approach to bindings
+- [redux-vuex](https://github.com/alexander-heimbuch/redux-vuex) - slightly different approach to bindings
