@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import reduxConnectVue from './index.js';
 
 describe('reduxConnectVue', () => {
+	let actions;
 	let store;
 
 	beforeEach(() => {
@@ -17,6 +18,11 @@ describe('reduxConnectVue', () => {
 				default:
 					return state;
 			}
+		});
+
+		actions = (dispatch) => ({
+			foo: () => dispatch({ type: 'foo' }),
+			bar: () => dispatch({ type: 'bar' })
 		});
 	});
 
@@ -48,11 +54,6 @@ describe('reduxConnectVue', () => {
 		it('does not throw an error when "mapStateToProps" is null', () => {
 			const localVue = createLocalVue();
 			localVue.use(reduxConnectVue, { store });
-
-			const actions = (dispatch) => ({
-				foo: () => dispatch({ type: 'foo' }),
-				bar: () => dispatch({ type: 'bar' })
-			});
 
 			const Component = connect(null, actions)({
 				template: '<p>Test Component</p>'
@@ -153,11 +154,6 @@ describe('reduxConnectVue', () => {
 				const localVue = createLocalVue();
 				localVue.use(reduxConnectVue, { store });
 
-				const actions = (dispatch) => ({
-					foo: () => dispatch({ type: 'foo' }),
-					bar: () => dispatch({ type: 'bar' })
-				});
-
 				const Component = connect(undefined, actions)({
 					template: '<p>Test Component</p>'
 				});
@@ -178,12 +174,12 @@ describe('reduxConnectVue', () => {
 					mapDispatchToPropsFactory: (actionCreators) => (dispatch) => bindActionCreators(actionCreators, dispatch)
 				});
 
-				const actions = {
+				const boundActions = {
 					foo: () => ({ type: 'foo' }),
 					bar: () => ({ type: 'bar' })
 				};
 
-				const Component = connect(undefined, actions)({
+				const Component = connect(undefined, boundActions)({
 					template: '<p>Test Component</p>'
 				});
 
@@ -201,11 +197,6 @@ describe('reduxConnectVue', () => {
 				const localVue = createLocalVue();
 				localVue.use(reduxConnectVue, { store });
 
-				const actions = (dispatch) => ({
-					foo: () => dispatch({ type: 'foo' }),
-					bar: () => dispatch({ type: 'bar' })
-				});
-
 				const Component = connect(undefined, actions)({
 					template: '<p>Test Component</p>'
 				});
@@ -219,11 +210,6 @@ describe('reduxConnectVue', () => {
 				jest.spyOn(store, 'subscribe').mockReturnValue(disconnectMock);
 				const localVue = createLocalVue();
 				localVue.use(reduxConnectVue, { store });
-
-				const actions = (dispatch) => ({
-					foo: () => dispatch({ type: 'foo' }),
-					bar: () => dispatch({ type: 'bar' })
-				});
 
 				const Component = connect(undefined, actions)({
 					template: '<p>Test Component</p>'

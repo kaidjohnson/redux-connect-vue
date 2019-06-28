@@ -1,4 +1,5 @@
 language: node_js
+node_js: 10
 install:
 - npm ci
 cache:
@@ -6,15 +7,14 @@ cache:
   - "$HOME/.npm"
 jobs:
   include:
+  - stage: lint
+    script: eslint './src/**/*.js'
   - stage: test
-    node_js: "10"
     script: jest --coverage --coverageReporters=text-lcov | coveralls
   - stage: build
-    node_js: "10"
     script: webpack
   - stage: release
     if: tag IS present
-    node_js: "10"
     script: npm run build
     deploy:
       provider: npm
