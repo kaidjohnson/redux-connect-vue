@@ -6,9 +6,17 @@ cache:
   - "$HOME/.npm"
 jobs:
   include:
-    - stage: test
-      node_js: node
-      script: jest --coverage --coverageReporters=text-lcov | coveralls
-    - stage: build
-      node_js: node
-      script: webpack
+  - stage: test
+    node_js: node
+    script: jest --coverage --coverageReporters=text-lcov | coveralls
+  - stage: build
+    node_js: node
+    script: webpack
+deploy:
+  provider: npm
+  email: kaidjohnson@gmail.com
+  api_key:
+    secure: hJLIDP7hH6tLw/cnjcrSJrqy4W0LcH4aJdy/TsCJ3KF8K5NnkebcKruFyq0TFE/GF7YGmolgIco4odXbz8AAfxMq9aswQzaivqVsTHqHuc5nY6mmnOSE7eGt5oQ/tL1YA7pRjBU4gUGHnVjHtB96bBG5zW5isF3s9bUgGa9ZFFd2rE8gH/pxLIMxZGxcXWZ74Vm4Gxrzs/rKJtEBaCUeCtyn6LZ/7ntfj1zSZCCW1cUUf8uwllpOwtjD9RNnOe0zLOg1QaWT1I3K5RfF8z9EFidb3UFv0yAaSnjG7w3FhLQ9UR50o52hO4cA8QXCgjSQmzJLjvYSo10B+1YOmO52K9T1wfxMjK4xYBEroSBPGLmfbKkytuktbF69oYEQHoGrvw8Uk3FCEIc3tuHWnSxJpJOvIftgpEoG31Ioo/Fy7jvYJE5RfyRgwJF7FlErkMds78ZMlMYd9M36uZQQsdWGvuW0K47oRhqUIOE7hVRnridvGr6Vxg7UgNRdAIDYTXh+C/JXPjomkN1bn1EgNA3lJkrypkthmT5PltiVO2FggMi3p5nFJjPcaJ9CyQYj0Ax6VUvj1yoNaZfz6taZK6L0/GdMvuP5uwNcHualwEwQrWDR2tLH9vlfgX+vuc8teosvJKaoBa8bpvy/9VHlcXZX52NDmlIFKkfN78/GRLXzfJM=
+  on:
+    tags: true
+    repo: kaidjohnson/redux-connect-vue
