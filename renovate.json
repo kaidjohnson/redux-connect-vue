@@ -1,0 +1,55 @@
+{
+  "assignees": [
+    "kaidjohnson"
+  ],
+  "automerge": true,
+  "labels": [
+    "automation"
+  ],
+  "major": {
+    "automerge": false
+  },
+  "extends": [
+    "config:base"
+  ],
+  "packageRules": [{
+    "groupName": "babel",
+    "packageNames": [
+      "babel-core"
+    ],
+    "packagePatterns": [
+      "^@babel"
+    ]
+  }, {
+    "groupName": "eslint",
+    "packagePatterns": [
+      "^eslint"
+    ]
+  }, {
+    "groupName": "jest",
+    "packageNames": [
+      "babel-jest"
+    ],
+    "packagePatterns": [
+      "^jest"
+    ]
+  }, {
+    "groupName": "redux",
+    "packageNames": [
+      "redux",
+      "reselect"
+    ]
+  }, {
+    "groupName": "vue",
+    "packagePatterns": [
+      "vue"
+    ]
+  }, {
+    "groupName": "webpack",
+    "packagePatterns": [
+      "webpack",
+      "-loader$"
+    ]
+  }],
+  "prCreation": "not-pending"
+}
