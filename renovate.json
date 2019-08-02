@@ -1,4 +1,7 @@
 {
+  "assignees": [
+    "kaidjohnson"
+  ],
   "automerge": true,
   "major": {
     "automerge": false
