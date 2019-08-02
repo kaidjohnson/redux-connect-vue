@@ -3,6 +3,9 @@
     "kaidjohnson"
   ],
   "automerge": true,
+  "labels": [
+    "automation"
+  ],
   "major": {
     "automerge": false
   },
