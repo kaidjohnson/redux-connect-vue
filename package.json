@@ -43,7 +43,7 @@
     "vue": "2.6.10",
     "vue-template-compiler": "2.6.10",
     "webpack": "4.39.2",
-    "webpack-cli": "3.3.6"
+    "webpack-cli": "3.3.7"
   },
   "peerDependencies": {
     "redux": "4.x",
