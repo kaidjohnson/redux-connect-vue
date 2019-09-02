@@ -39,7 +39,7 @@
     "jest": "24.9.0",
     "redux": "4.0.4",
     "reselect": "4.0.0",
-    "size-limit": "2.1.1",
+    "size-limit": "2.1.2",
     "vue": "2.6.10",
     "vue-template-compiler": "2.6.10",
     "webpack": "4.39.3",
