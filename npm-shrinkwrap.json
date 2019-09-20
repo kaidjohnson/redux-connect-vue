@@ -7483,9 +7483,9 @@
       "dev": true
     },
     "size-limit": {
-      "version": "2.1.5",
-      "resolved": "https://registry.npmjs.org/size-limit/-/size-limit-2.1.5.tgz",
-      "integrity": "sha512-MG+kALmBNAw46QwDr62uPJlfeUjnKy+fLvBjQbIh6egPPelMjDaDb4b9ZgaJa0EkJGVF9khCV1ne1uNWsMZZ6w==",
+      "version": "2.1.6",
+      "resolved": "https://registry.npmjs.org/size-limit/-/size-limit-2.1.6.tgz",
+      "integrity": "sha512-BXrH1jMA6uXtqyv/9koJQocGn8pHogv5r+zs9eMFI+Qh5oQVmN0GPxK3ok5gkBFJ6AQ5Ug7LM1E8SDp635XG8Q==",
       "dev": true,
       "requires": {
         "bytes": "^3.1.0",
