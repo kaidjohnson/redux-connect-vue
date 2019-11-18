@@ -42,8 +42,8 @@
     "size-limit": "2.2.1",
     "vue": "2.6.10",
     "vue-template-compiler": "2.6.10",
-    "webpack": "4.41.1",
-    "webpack-cli": "3.3.9"
+    "webpack": "4.41.2",
+    "webpack-cli": "3.3.10"
   },
   "peerDependencies": {
     "redux": "4.x",
