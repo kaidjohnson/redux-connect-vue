@@ -1950,9 +1950,9 @@
       }
     },
     "@babel/runtime": {
-      "version": "7.7.4",
-      "resolved": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.7.4.tgz",
-      "integrity": "sha512-r24eVUUr0QqNZa+qrImUk8fn5SPhHq+IfYvIoIMg0do3GdK9sMdiLKP3GYVVaxpPKORgm8KRKaNTEhAjgIpLMw==",
+      "version": "7.7.6",
+      "resolved": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.7.6.tgz",
+      "integrity": "sha512-BWAJxpNVa0QlE5gZdWjSxXtemZyZ9RmrmVozxt3NUXeZhVIJ5ANyqmMc0JDrivBZyxUuQvFxlvH4OWWOogGfUw==",
       "dev": true,
       "requires": {
         "regenerator-runtime": "^0.13.2"
@@ -2344,9 +2344,9 @@
       "dev": true
     },
     "@types/node": {
-      "version": "12.12.14",
-      "resolved": "https://registry.npmjs.org/@types/node/-/node-12.12.14.tgz",
-      "integrity": "sha512-u/SJDyXwuihpwjXy7hOOghagLEV1KdAST6syfnOk6QZAMzZuWZqXy5aYYZbh8Jdpd4escVFP0MvftHNDb9pruA==",
+      "version": "12.12.18",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-12.12.18.tgz",
+      "integrity": "sha512-DBkZuIMFuAfjJHiunyRc+aNvmXYNwV1IPMgGKGlwCp6zh6MKrVtmvjSWK/axWcD25KJffkXgkfvFra8ndenXAw==",
       "dev": true
     },
     "@types/normalize-package-data": {
@@ -8593,9 +8593,9 @@
       "dev": true
     },
     "size-limit": {
-      "version": "2.2.2",
-      "resolved": "https://registry.npmjs.org/size-limit/-/size-limit-2.2.2.tgz",
-      "integrity": "sha512-SgKOynIVQ2Y+V7H0k9Lbot4UfB9KTs+jA4Zj9VHMYAOhB3UydZ3yk424aDxSS2FcN9bYNqn39+nOh93lhJcPbQ==",
+      "version": "2.2.3",
+      "resolved": "https://registry.npmjs.org/size-limit/-/size-limit-2.2.3.tgz",
+      "integrity": "sha512-UbhNAVlX/cOcK55XMuXGW1tOoZzMr69+WDDT5PZbQ72lflp1BLpVxk0i5bRuJJAr0Oobr7vFHVeNc9nHkKadWA==",
       "dev": true,
       "requires": {
         "bytes": "^3.1.0",
@@ -8603,7 +8603,7 @@
         "ci-job-number": "^0.3.1",
         "cosmiconfig": "^6.0.0",
         "globby": "^10.0.1",
-        "read-pkg-up": "^7.0.0"
+        "read-pkg-up": "^7.0.1"
       },
       "dependencies": {
         "ansi-styles": {
@@ -8714,9 +8714,9 @@
           }
         },
         "read-pkg-up": {
-          "version": "7.0.0",
-          "resolved": "https://registry.npmjs.org/read-pkg-up/-/read-pkg-up-7.0.0.tgz",
-          "integrity": "sha512-t2ODkS/vTTcRlKwZiZsaLGb5iwfx9Urp924aGzVyboU6+7Z2i6eGr/G1Z4mjvwLLQV3uFOBKobNRGM3ux2PD/w==",
+          "version": "7.0.1",
+          "resolved": "https://registry.npmjs.org/read-pkg-up/-/read-pkg-up-7.0.1.tgz",
+          "integrity": "sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==",
           "dev": true,
           "requires": {
             "find-up": "^4.1.0",
