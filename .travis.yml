@@ -11,12 +11,13 @@ jobs:
     script: npm run lint
   - stage: test
     before_script:
-    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+      > ./cc-test-reporter
     - chmod +x ./cc-test-reporter
-    - ./cc-test-reporter before-build
+    - "./cc-test-reporter before-build"
     script: npm run test
     after_script:
-    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+    - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
   - stage: size
     if: tag IS blank
     script: npm run size
@@ -29,7 +30,8 @@ jobs:
     deploy:
       provider: npm
       email: "$NPM_EMAIL"
-      api_key: "$NPM_TOKEN"
+      api_token: "$NPM_TOKEN"
+      edge: true
       skip_cleanup: true
       on:
         tags: true
