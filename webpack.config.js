@@ -9,6 +9,9 @@ module.exports = {
 		library: 'ReduxConnectVue',
 		libraryTarget: 'umd'
 	},
+	externals: {
+		'vue-function-api': 'VueFunctionApi'
+	},
 	module: {
 		rules: [
 			{

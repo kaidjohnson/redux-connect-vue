@@ -6,9 +6,12 @@
 
 # redux-connect-vue
 
+> **Note: redux-connect-vue v2 is compatible with Vue 2.x using the composition API provided from [Vue Function API](https://github.com/vuejs/composition-api)**
+> If you are looking for a Vue 2.x compatible version without needing to use the composition API, check out [v1](https://github.com/kaidjohnson/redux-connect-vue/tree/v1.1.0)
+
 A tiny Vue plugin that connects components with Redux.
 
-No HOCs. No complex API. No dependencies. Just connect and go!
+No HOCs. No complex API. No dependencies. Just use and go!
 
 - Simple: < 60 lines code.
 - Tiny: < 0.3 KB gzipped.
@@ -28,11 +31,15 @@ New to Redux? [Start Here](https://redux.js.org/introduction/getting-started)
 - mapDispatchToStateFactory (optional): Factory function that receives the supplied _mapStateToProps_ and returns a function that receives _state_ and returns an _{Object}_ of props. Defaults to an identity function.
 - mapDispatchToPropsFactory (optional): Factory function that receives the supplied _mapDispatchToProps_ and returns a function that receives _dispatch_ and returns an _{Object}_ of actions. Defaults to an identity function.
 
-### connect(_mapStateToProps_, _mapDispatchToProps_)
+### useState(_mapStateToProps_)
 
 - mapStateToProps: Argument that gets passed to _mapStateToPropsFactory_. Binds to component _$data_ (available on the vm directly).
+- returns an object to be included in a setup() return
+
+### useActions(_mapDispatchToProps_)
+
 - mapDispatchToProps: Argument that gets passed to _mapDispatchToPropsFactory_. Binds to component _$actions_ (available at _vm.$actions_).
-- returns a function that receives the Vue component configuration.
+- returns an object to be included in a setup() return
 
 ## Standard Example
 
@@ -49,12 +56,14 @@ export default createStore(combineReducers({
 }));
 ```
 
-Install the redux-connect-vue plugin:
+Install the redux-connect-vue plugin (requires [vue-function-api](https://github.com/vuejs/composition-api/tree/v3.0.0-beta.0)):
 
 ```
 import ReduxConnectVue from 'redux-connect-vue';
 import store from './store.js';
+import VueFunctionApi from 'vue-function-api';
 
+Vue.use(VueFunctionApi);
 Vue.use(ReduxConnectVue, { store });
 ```
 
@@ -66,17 +75,23 @@ Connect your state and actions to your component:
 <script>
 import { connect } from 'redux-connect-vue';
 
-const state = (state) => ({
-  foo: state.foo
-});
+export default {
+	setup() {
+		const state = useState((state) => ({
+			foo: state.foo
+		}));
 
-const actions = (dispatch) => ({
-  doSomething: (payload) => dispatch({ type: 'DO_SOMETHING', payload })
-});
+		const actions = useActions((dispatch) => ({
+			doSomething: (payload) => dispatch({ type: 'DO_SOMETHING', paylaod })
+		}));
 
-export default connect(state, actions)({
-  template: '<p>Foo: {{ foo }}</p><button @click="$actions.doSomething('hello')"></button>'
-});
+		return {
+			...state,
+			...actions
+		};
+	},
+  template: '<p>Foo: {{ foo }}</p><button @click="doSomething('hello')"></button>'
+};
 </script>
 ```
 
@@ -99,17 +114,23 @@ Vue.use(ReduxConnectVue, {
 <script>
 import { connect } from 'redux-connect-vue';
 
-const state = (state) => ({
-  foo: state.foo
-});
+export default {
+	setup() {
+		const state = useState((state) => ({
+			foo: state.foo
+		}));
 
-const actions = {
-  doSomething: (payload) => ({ type: 'DO_SOMETHING', payload })
+		const actions = useActions({
+			doSomething: (payload) => ({ type: 'DO_SOMETHING', payload })
+		});
+
+		return {
+			...state,
+			...actions
+		};
+	},
+  template: '<p>Foo: {{ foo }}</p><button @click="doSomething('hello')"></button>'
 };
-
-export default connect(state, actions)({
-  template: '<p>Foo: {{ foo }}</p><button @click="$actions.doSomething('hello')"></button>'
-});
 </script>
 ```
 
@@ -135,17 +156,23 @@ Vue.use(ReduxConnectVue, {
 import { connect } from 'redux-connect-vue';
 import { createSelector } from 'reselect';
 
-const state = {
-  foo: createSelector((state) => state.foo, (foo) => foo.toUpperCase())
-};
+export default {
+	setup() {
+		const state = useState({
+			foo: createSelector((state) => state.foo, (foo) => foo.toUpperCase())
+		});
 
-const actions = {
-  doSomething: (payload) => ({ type: 'DO_SOMETHING', payload })
-};
+		const actions = useActions({
+			doSomething: (payload) => ({ type: 'DO_SOMETHING', payload })
+		});
 
-export default connect(state, actions)({
-  template: '<p>Foo: {{ foo }}</p><button @click="$actions.doSomething('hello')"></button>'
-});
+		return {
+			...state,
+			...actions
+		};
+	},
+  template: '<p>Foo: {{ foo }}</p><button @click="doSomething('hello')"></button>'
+};
 </script>
 ```
 
