@@ -1,10 +1,6 @@
 language: node_js
-node_js: 10
-install:
-- npm ci
-cache:
-  directories:
-  - "$HOME/.npm"
+node_js:
+  - 14
 jobs:
   include:
   - stage: lint
@@ -32,6 +28,5 @@ jobs:
       email: "$NPM_EMAIL"
       api_token: "$NPM_TOKEN"
       edge: true
-      skip_cleanup: true
       on:
         tags: true
