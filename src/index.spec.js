@@ -128,7 +128,7 @@ describe('reduxConnectVue', () => {
 			jest.spyOn(store, 'dispatch');
 		});
 
-		it('extends components with state', () => {
+		it('extends components with actions', () => {
 			const localVue = createLocalVue();
 			localVue.use(VueFunctionApi);
 			localVue.use(reduxConnectVue, { store });
