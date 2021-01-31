@@ -1,14 +1,11 @@
 language: node_js
-node_js: 14
-os: linux
-dist: focal
-cache:
-  directories:
-    - "$HOME/.npm"
-install:
-  - npm ci
+node_js:
+  - 14
 jobs:
   include:
+  - stage: build
+    if: tag IS blank
+    script: npm run build && npm run size
   - stage: lint
     script: npm run lint
   - stage: test
@@ -20,12 +17,6 @@ jobs:
     script: npm run test
     after_script:
     - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
-  - stage: size
-    if: tag IS blank
-    script: npm run size
-  - stage: build
-    if: tag IS blank
-    script: npm run build
   - stage: release
     if: tag IS present
     script: npm run build
@@ -34,6 +25,5 @@ jobs:
       email: "$NPM_EMAIL"
       api_token: "$NPM_TOKEN"
       edge: true
-      cleanup: false
       on:
         tags: true
