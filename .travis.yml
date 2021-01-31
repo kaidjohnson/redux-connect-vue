@@ -14,9 +14,12 @@ jobs:
     script: npm run test
     after_script:
     - "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
+  - stage: size
+    if: tag IS blank
+    script: npm run size
   - stage: build
     if: tag IS blank
-    script: npm run build && npm run size
+    script: npm run build
   - stage: release
     if: tag IS present
     script: npm run build
