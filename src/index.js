@@ -1,15 +1,12 @@
-const identity = (v) => v;
+import { inject, onBeforeDestroy, reactive, toRefs } from 'vue-function-api';
+
+const OptionsSymbol = Symbol();
 
 /**
- * @param {*} [mapStateToProps]
- * @param {*} [mapDispatchToProps]
- * @returns {function (component: Object): Object}
+ * @param {*} v
+ * @returns {*}
  */
-export const connect = (mapStateToProps, mapDispatchToProps) => (component) => ({
-	...component,
-	mapDispatchToProps,
-	mapStateToProps
-});
+const identity = (v) => v;
 
 /**
  * @param {Object} Vue
@@ -19,42 +16,47 @@ export const connect = (mapStateToProps, mapDispatchToProps) => (component) => (
  * @param {Function} [options.mapStateToPropsFactory]
  */
 export default (Vue, {
-	store,
 	mapDispatchToPropsFactory = identity,
-	mapStateToPropsFactory = identity
+	mapStateToPropsFactory = identity,
+	store
 }) => {
 	Vue.mixin({
-		beforeCreate() {
-			if (this.$options.mapDispatchToProps) {
-				const mapDispatchToProps = mapDispatchToPropsFactory(this.$options.mapDispatchToProps);
-				this.$actions = mapDispatchToProps(store.dispatch);
-			}
-
-			if (this.$options.mapStateToProps) {
-				const mapStateToProps = mapStateToPropsFactory(this.$options.mapStateToProps);
-				this._initialData = mapStateToProps(store.getState());
-
-				const keys = Object.keys(this._initialData);
-				this._disconnectState = store.subscribe(() => {
-					const next = mapStateToProps(store.getState());
-
-					keys.forEach((key) => {
-						if (this.$data[key] !== next[key]) {
-							this.$data[key] = next[key];
-						}
-					});
-				});
-			}
-		},
-		data() {
-			return {
-				...this._initialData
-			};
-		},
-		destroyed() {
-			if (this._disconnectState) {
-				this._disconnectState();
+		provide: {
+			[OptionsSymbol]: {
+				mapDispatchToPropsFactory,
+				mapStateToPropsFactory,
+				store
 			}
 		}
 	});
+};
+
+/**
+ * @param {*} mapDispatchToProps
+ * @returns {Object}
+ */
+export const useActions = (mapDispatchToProps) => {
+	const { mapDispatchToPropsFactory, store } = inject(OptionsSymbol);
+
+	return mapDispatchToPropsFactory(mapDispatchToProps)(store.dispatch);
+};
+
+/**
+ * @param {*} mapStateToProps
+ * @returns {Object}
+ */
+export const useState = (mapStateToProps) => {
+	const { mapStateToPropsFactory, store } = inject(OptionsSymbol);
+	const mapStateToPropsFinal = mapStateToPropsFactory(mapStateToProps);
+	const state = reactive(mapStateToPropsFinal(store.getState()));
+
+	onBeforeDestroy(store.subscribe(() => {
+		const next = mapStateToPropsFinal(store.getState());
+
+		Object.keys(next).forEach((key) => {
+			state[key] = next[key];
+		});
+	}));
+
+	return toRefs(state);
 };

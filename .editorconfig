@@ -7,11 +7,7 @@ root = true
 indent_style = tab
 
 # npm commands normalize package.json to 2-space spaces
-[*.json]
-indent_style = space
-indent_size = 2
-
-[*.yml]
+[*.{json,md,yml}]
 indent_style = space
 indent_size = 2
 
