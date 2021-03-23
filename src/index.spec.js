@@ -192,6 +192,32 @@ describe('reduxConnectVue', () => {
 				expect(store.dispatch).toHaveBeenCalledWith({ type: 'bar' });
 			});
 
+			it('allows actions to be dispatched within beforeCreate', () => {
+				const localVue = createLocalVue();
+				localVue.use(reduxConnectVue, {
+					store,
+					mapDispatchToPropsFactory: (actionCreators) => (dispatch) => bindActionCreators(actionCreators, dispatch)
+				});
+
+				const state = (state) => ({
+					foo: state.foo
+				});
+
+				const actions = {
+					changeFoo: (payload) => ({ payload, type: 'CHANGE_FOO' })
+				};
+
+				const Component = connect(state, actions)({
+					beforeCreate() {
+						this.$actions.changeFoo('FOO');
+					},
+					template: '<p>Test Component</p>'
+				});
+
+				const { vm } = mount(Component, { localVue });
+				expect(vm.foo).toBe('FOO');
+			});
+
 			it('does not subscribe to the store', () => {
 				jest.spyOn(store, 'subscribe');
 				const localVue = createLocalVue();

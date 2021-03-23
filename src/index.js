@@ -36,11 +36,12 @@ export default (Vue, {
 
 				const keys = Object.keys(this._initialData);
 				this._disconnectState = store.subscribe(() => {
+					const data = this.$data || this._initialData;
 					const next = mapStateToProps(store.getState());
 
 					keys.forEach((key) => {
-						if (this.$data[key] !== next[key]) {
-							this.$data[key] = next[key];
+						if (data[key] !== next[key]) {
+							data[key] = next[key];
 						}
 					});
 				});
