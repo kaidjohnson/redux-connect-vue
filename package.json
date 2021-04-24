@@ -38,7 +38,7 @@
     "eslint-plugin-jest": "24.3.5",
     "eslint-plugin-vue": "7.9.0",
     "jest": "26.6.3",
-    "redux": "4.0.5",
+    "redux": "4.1.0",
     "reselect": "4.0.0",
     "size-limit": "4.10.1",
     "vue": "2.6.12",
