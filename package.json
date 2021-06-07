@@ -41,9 +41,9 @@
     "redux": "4.1.0",
     "reselect": "4.0.0",
     "size-limit": "4.10.1",
-    "vue": "2.6.13",
+    "vue": "2.6.14",
     "vue-function-api": "3.0.0-beta.0",
-    "vue-template-compiler": "2.6.13",
+    "vue-template-compiler": "2.6.14",
     "webpack": "5.38.1",
     "webpack-cli": "4.7.0"
   },
