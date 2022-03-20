@@ -1,5 +1,7 @@
 const path = require('path');
 
+process.env.NODE_ENV = 'production';
+
 module.exports = {
 	mode: 'production',
 	entry: path.resolve(__dirname, 'src/index.js'),
@@ -10,7 +12,7 @@ module.exports = {
 		libraryTarget: 'umd'
 	},
 	externals: {
-		'vue-function-api': 'VueFunctionApi'
+		vue: 'Vue'
 	},
 	module: {
 		rules: [

@@ -1,10 +1,10 @@
 import { bindActionCreators, createStore } from 'redux';
-import { createLocalVue, mount } from '@vue/test-utils';
-import reduxConnectVue, { useActions, useState } from './index.js';
+import ReduxConnectVue, { useActions, useState } from './index.js';
+import { createApp } from 'vue';
 import { createStructuredSelector } from 'reselect';
-import VueFunctionApi from 'vue-function-api';
+import { mount } from '@vue/test-utils';
 
-describe('reduxConnectVue', () => {
+describe('ReduxConnectVue', () => {
 	let actions;
 	let store;
 
@@ -26,20 +26,16 @@ describe('reduxConnectVue', () => {
 		});
 	});
 
-	it('creates a Vue mixin', () => {
-		const localVue = createLocalVue();
-		jest.spyOn(localVue, 'mixin');
+	it('creates a Vue provider', () => {
+		const app = createApp({});
+		jest.spyOn(app, 'provide');
 
-		localVue.use(reduxConnectVue, { store });
-		expect(localVue.mixin).toHaveBeenCalled();
+		app.use(ReduxConnectVue, { store });
+		expect(app.provide).toHaveBeenCalled();
 	});
 
 	describe('useState', () => {
 		it('extends components with state', () => {
-			const localVue = createLocalVue();
-			localVue.use(VueFunctionApi);
-			localVue.use(reduxConnectVue, { store });
-
 			const Component = {
 				setup() {
 					return useState((state) => ({
@@ -50,19 +46,18 @@ describe('reduxConnectVue', () => {
 				template: '<p>Test Component</p>'
 			};
 
-			const { vm } = mount(Component, { localVue });
+			const { vm } = mount(Component, {
+				global: {
+					plugins: [
+						[ReduxConnectVue, { store }]
+					]
+				}
+			});
 			expect(vm.foo).toBe('foo');
 			expect(vm.bar).toBe('bar');
 		});
 
 		it('uses the mapStateToPropsFactory option to map the useState callback', () => {
-			const localVue = createLocalVue();
-			localVue.use(VueFunctionApi);
-			localVue.use(reduxConnectVue, {
-				mapStateToPropsFactory: createStructuredSelector,
-				store
-			});
-
 			const Component = {
 				setup() {
 					return useState({
@@ -73,16 +68,21 @@ describe('reduxConnectVue', () => {
 				template: '<p>Test Component</p>'
 			};
 
-			const { vm } = mount(Component, { localVue });
+			const { vm } = mount(Component, {
+				global: {
+					plugins: [
+						[ReduxConnectVue, {
+							mapStateToPropsFactory: createStructuredSelector,
+							store
+						}]
+					]
+				}
+			});
 			expect(vm.foo).toBe('foo');
 			expect(vm.bar).toBe('bar');
 		});
 
 		it('subscribes to the store and updates the properties defined in "mapStateToProps" when the relevant state changes', async () => {
-			const localVue = createLocalVue();
-			localVue.use(VueFunctionApi);
-			localVue.use(reduxConnectVue, { store });
-
 			const Component = {
 				setup() {
 					return useState((state) => ({
@@ -93,7 +93,13 @@ describe('reduxConnectVue', () => {
 				template: '<p>Test Component</p>'
 			};
 
-			const { vm } = mount(Component, { localVue });
+			const { vm } = mount(Component, {
+				global: {
+					plugins: [
+						[ReduxConnectVue, { store }]
+					]
+				}
+			});
 			expect(vm.foo).toBe('foo');
 			expect(vm.bar).toBe('bar');
 
@@ -101,12 +107,9 @@ describe('reduxConnectVue', () => {
 			expect(vm.foo).toBe('FOO');
 		});
 
-		it('unsubscribes from the store when it is destroyed', () => {
+		it('unsubscribes from the store when it is unmounted', () => {
 			const disconnectMock = jest.fn();
 			jest.spyOn(store, 'subscribe').mockReturnValue(disconnectMock);
-			const localVue = createLocalVue();
-			localVue.use(VueFunctionApi);
-			localVue.use(reduxConnectVue, { store });
 
 			const Component = {
 				setup() {
@@ -118,7 +121,13 @@ describe('reduxConnectVue', () => {
 				template: '<p>Test Component</p>'
 			};
 
-			mount(Component, { localVue }).destroy();
+			mount(Component, {
+				global: {
+					plugins: [
+						[ReduxConnectVue, { store }]
+					]
+				}
+			}).unmount();
 			expect(disconnectMock).toHaveBeenCalled();
 		});
 	});
@@ -129,10 +138,6 @@ describe('reduxConnectVue', () => {
 		});
 
 		it('extends components with actions', () => {
-			const localVue = createLocalVue();
-			localVue.use(VueFunctionApi);
-			localVue.use(reduxConnectVue, { store });
-
 			const Component = {
 				setup() {
 					return useActions(actions);
@@ -140,7 +145,13 @@ describe('reduxConnectVue', () => {
 				template: '<p>Test Component</p>'
 			};
 
-			const { vm } = mount(Component, { localVue });
+			const { vm } = mount(Component, {
+				global: {
+					plugins: [
+						[ReduxConnectVue, { store }]
+					]
+				}
+			});
 
 			vm.foo();
 			expect(store.dispatch).toHaveBeenCalledWith({ type: 'foo' });
@@ -150,13 +161,6 @@ describe('reduxConnectVue', () => {
 		});
 
 		it('uses the mapDispatchToPropsFactory option to map the useActions callback', () => {
-			const localVue = createLocalVue();
-			localVue.use(VueFunctionApi);
-			localVue.use(reduxConnectVue, {
-				store,
-				mapDispatchToPropsFactory: (actionCreators) => (dispatch) => bindActionCreators(actionCreators, dispatch)
-			});
-
 			const Component = {
 				setup() {
 					return useActions({
@@ -167,7 +171,16 @@ describe('reduxConnectVue', () => {
 				template: '<p>Test Component</p>'
 			};
 
-			const { vm } = mount(Component, { localVue });
+			const { vm } = mount(Component, {
+				global: {
+					plugins: [
+						[ReduxConnectVue, {
+							store,
+							mapDispatchToPropsFactory: (actionCreators) => (dispatch) => bindActionCreators(actionCreators, dispatch)
+						}]
+					]
+				}
+			});
 
 			vm.foo();
 			expect(store.dispatch).toHaveBeenCalledWith({ type: 'foo' });
@@ -178,9 +191,6 @@ describe('reduxConnectVue', () => {
 
 		it('does not subscribe to the store', () => {
 			jest.spyOn(store, 'subscribe');
-			const localVue = createLocalVue();
-			localVue.use(VueFunctionApi);
-			localVue.use(reduxConnectVue, { store });
 
 			const Component = {
 				setup() {
@@ -189,16 +199,19 @@ describe('reduxConnectVue', () => {
 				template: '<p>Test Component</p>'
 			};
 
-			mount(Component, { localVue });
+			mount(Component, {
+				global: {
+					plugins: [
+						[ReduxConnectVue, { store }]
+					]
+				}
+			});
 			expect(store.subscribe).not.toHaveBeenCalled();
 		});
 
-		it('does not unsubscribe from the store when it is destroyed', () => {
+		it('does not unsubscribe from the store when it is unmounted', () => {
 			const disconnectMock = jest.fn();
 			jest.spyOn(store, 'subscribe').mockReturnValue(disconnectMock);
-			const localVue = createLocalVue();
-			localVue.use(VueFunctionApi);
-			localVue.use(reduxConnectVue, { store });
 
 			const Component = {
 				setup() {
@@ -207,17 +220,19 @@ describe('reduxConnectVue', () => {
 				template: '<p>Test Component</p>'
 			};
 
-			mount(Component, { localVue }).destroy();
+			mount(Component, {
+				global: {
+					plugins: [
+						[ReduxConnectVue, { store }]
+					]
+				}
+			}).unmount();
 			expect(disconnectMock).not.toHaveBeenCalled();
 		});
 	});
 
 	describe('useState and useActions together', () => {
 		it('extends components with both state and actions', () => {
-			const localVue = createLocalVue();
-			localVue.use(VueFunctionApi);
-			localVue.use(reduxConnectVue, { store });
-
 			const Component = {
 				setup() {
 					const state = useState((state) => ({
@@ -237,7 +252,13 @@ describe('reduxConnectVue', () => {
 				template: '<p>Test Component</p>'
 			};
 
-			const { vm } = mount(Component, { localVue });
+			const { vm } = mount(Component, {
+				global: {
+					plugins: [
+						[ReduxConnectVue, { store }]
+					]
+				}
+			});
 			expect(vm.foo).toBe('foo');
 			expect(vm.bar).toBe('bar');
 
@@ -246,14 +267,6 @@ describe('reduxConnectVue', () => {
 		});
 
 		it('uses the mapDispatchToPropsFactory and mapStateToPropsFactory options to map the useActions and useState callbacks', () => {
-			const localVue = createLocalVue();
-			localVue.use(VueFunctionApi);
-			localVue.use(reduxConnectVue, {
-				mapDispatchToPropsFactory: (actionCreators) => (dispatch) => bindActionCreators(actionCreators, dispatch),
-				mapStateToPropsFactory: createStructuredSelector,
-				store
-			});
-
 			const Component = {
 				setup() {
 					const state = useState({
@@ -273,7 +286,17 @@ describe('reduxConnectVue', () => {
 				template: '<p>Test Component</p>'
 			};
 
-			const { vm } = mount(Component, { localVue });
+			const { vm } = mount(Component, {
+				global: {
+					plugins: [
+						[ReduxConnectVue, {
+							mapDispatchToPropsFactory: (actionCreators) => (dispatch) => bindActionCreators(actionCreators, dispatch),
+							mapStateToPropsFactory: createStructuredSelector,
+							store
+						}]
+					]
+				}
+			});
 			expect(vm.foo).toBe('foo');
 			expect(vm.bar).toBe('bar');
 

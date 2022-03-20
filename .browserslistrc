@@ -1,2 +1,4 @@
-last 2 versions
-not ie <= 10
+defaults
+not dead
+not ie 11
+not < 0.5%

@@ -56,15 +56,14 @@ export default createStore(combineReducers({
 }));
 ```
 
-Install the redux-connect-vue plugin (requires [vue-function-api](https://github.com/vuejs/composition-api/tree/v3.0.0-beta.0)):
+Install the redux-connect-vue plugin:
 
 ```
+import { createApp } from 'vue';
 import ReduxConnectVue from 'redux-connect-vue';
 import store from './store.js';
-import VueFunctionApi from 'vue-function-api';
 
-Vue.use(VueFunctionApi);
-Vue.use(ReduxConnectVue, { store });
+createApp(...).use(ReduxConnectVue, { store });
 ```
 
 Connect your state and actions to your component:
@@ -99,10 +98,11 @@ export default {
 
 ```
 import { bindActionCreators } from 'redux';
+import { createApp } from 'vue';
 import ReduxConnectVue from 'redux-connect-vue';
 import store from './store.js';
 
-Vue.use(ReduxConnectVue, {
+createApp(...).use(ReduxConnectVue, {
   store,
   mapDispatchToPropsFactory: (actionCreators) => (dispatch) => bindActionCreators(actionCreators, dispatch)
 });
@@ -138,11 +138,12 @@ export default {
 
 ```
 import { bindActionCreators } from 'redux';
+import { createApp } from 'vue';
 import { createStructuredSelector } from 'reselect';
 import ReduxConnectVue from 'redux-connect-vue';
 import store from './store.js';
 
-Vue.use(ReduxConnectVue, {
+createApp(...).use(ReduxConnectVue, {
   store,
   mapDispatchToPropsFactory: (actionCreators) => (dispatch) => bindActionCreators(actionCreators, dispatch),
   mapStateToPropsFactory: createStructuredSelector

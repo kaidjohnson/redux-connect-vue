@@ -1,4 +1,4 @@
-import { inject, onBeforeDestroy, reactive, toRefs } from 'vue-function-api';
+import { inject, onBeforeUnmount, shallowReactive, toRefs } from 'vue';
 
 const OptionsSymbol = Symbol();
 
@@ -9,26 +9,24 @@ const OptionsSymbol = Symbol();
 const identity = (v) => v;
 
 /**
- * @param {Object} Vue
+ * @param {Object} app
  * @param {Object} options
  * @param {Object} options.store
  * @param {Function} [options.mapDispatchToPropsFactory]
  * @param {Function} [options.mapStateToPropsFactory]
  */
-export default (Vue, {
-	mapDispatchToPropsFactory = identity,
-	mapStateToPropsFactory = identity,
-	store
-}) => {
-	Vue.mixin({
-		provide: {
-			[OptionsSymbol]: {
-				mapDispatchToPropsFactory,
-				mapStateToPropsFactory,
-				store
-			}
-		}
-	});
+export default {
+	install(app, {
+		mapDispatchToPropsFactory = identity,
+		mapStateToPropsFactory = identity,
+		store
+	}) {
+		app.provide(OptionsSymbol, {
+			mapDispatchToPropsFactory,
+			mapStateToPropsFactory,
+			store
+		});
+	}
 };
 
 /**
@@ -48,9 +46,9 @@ export const useActions = (mapDispatchToProps) => {
 export const useState = (mapStateToProps) => {
 	const { mapStateToPropsFactory, store } = inject(OptionsSymbol);
 	const mapStateToPropsFinal = mapStateToPropsFactory(mapStateToProps);
-	const state = reactive(mapStateToPropsFinal(store.getState()));
+	const state = shallowReactive(mapStateToPropsFinal(store.getState()));
 
-	onBeforeDestroy(store.subscribe(() => {
+	onBeforeUnmount(store.subscribe(() => {
 		const next = mapStateToPropsFinal(store.getState());
 
 		Object.keys(next).forEach((key) => {
