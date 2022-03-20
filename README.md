@@ -1,5 +1,5 @@
 [![npm](https://img.shields.io/npm/v/redux-connect-vue)](https://www.npmjs.com/package/redux-connect-vue/v/latest?activeTab=versions)
-[![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/kaidjohnson/redux-connect-vue)](https://github.com/kaidjohnson/redux-connect-vue/blob/master/package-lock.json)
+[![Depfu](https://badges.depfu.com/badges/2304b15e9b7743ca9f9673eab586f915/overview.svg)](https://depfu.com/github/kaidjohnson/redux-connect-vue?project_id=34801)
 [![Build Status](https://app.travis-ci.com/kaidjohnson/redux-connect-vue.svg?branch=master)](https://app.travis-ci.com/kaidjohnson/redux-connect-vue)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e84db5d5c2cd53e07c3e/test_coverage)](https://codeclimate.com/github/kaidjohnson/redux-connect-vue/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e84db5d5c2cd53e07c3e/maintainability)](https://codeclimate.com/github/kaidjohnson/redux-connect-vue/maintainability)
