@@ -1,8 +1,9 @@
-[![npm version](https://badge.fury.io/js/redux-connect-vue.svg)](https://badge.fury.io/js/redux-connect-vue)
-[![Dependency Status](https://david-dm.org/kaidjohnson/redux-connect-vue/dev-status.svg)](https://david-dm.org/kaidjohnson/redux-connect-vue?type=dev)
-[![Build Status](https://travis-ci.org/kaidjohnson/redux-connect-vue.svg?branch=master)](https://travis-ci.org/kaidjohnson/redux-connect-vue)
+[![npm](https://img.shields.io/npm/v/redux-connect-vue)](https://www.npmjs.com/package/redux-connect-vue/v/latest?activeTab=versions)
+[![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/kaidjohnson/redux-connect-vue)](https://github.com/kaidjohnson/redux-connect-vue/blob/master/package-lock.json)
+[![Build Status](https://app.travis-ci.com/kaidjohnson/redux-connect-vue.svg?branch=master)](https://app.travis-ci.com/kaidjohnson/redux-connect-vue)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/e84db5d5c2cd53e07c3e/test_coverage)](https://codeclimate.com/github/kaidjohnson/redux-connect-vue/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/e84db5d5c2cd53e07c3e/maintainability)](https://codeclimate.com/github/kaidjohnson/redux-connect-vue/maintainability)
+[![GitHub](https://img.shields.io/github/license/kaidjohnson/redux-connect-vue)](https://github.com/kaidjohnson/redux-connect-vue/blob/master/LICENSE)
 
 # redux-connect-vue
 
