@@ -6,6 +6,7 @@ module.exports = {
 	],
 	coverageReporters: ['html', 'lcov', 'text', 'text-summary'],
 	moduleFileExtensions: ['js'],
+	testEnvironment: 'jsdom',
 	testMatch: [
 		'**/src/**/*.spec.js'
 	],
