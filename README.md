@@ -189,7 +189,4 @@ This library is opinionated, as is each of the other libraries out there. It was
 There are a lot of options out there that each do similar things, in case you're looking for something else:
 
 - [vuejs-redux](https://github.com/titouancreach/vuejs-redux) - tiny Provider HOC
-- [redux-vue-connect](https://github.com/itsazzad/redux-vue-connect) - HOC connector
-- [vue-redux-connect](https://github.com/peerhenry/vue-redux-connect) - A variation on redux-vue-connect
-- [revux](https://github.com/edvincandon/revux) - inspired by revue
 - [redux-vuex](https://github.com/alexander-heimbuch/redux-vuex) - slightly different approach to bindings
