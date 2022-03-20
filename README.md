@@ -6,15 +6,15 @@
 
 # redux-connect-vue
 
-> **Note: redux-connect-vue v2 is compatible with Vue 2.x using the composition API provided from [Vue Function API](https://github.com/vuejs/composition-api)**
-> If you are looking for a Vue 2.x compatible version without needing to use the composition API, check out [v1](https://github.com/kaidjohnson/redux-connect-vue/tree/v1.1.0)
+> **Note: redux-connect-vue v3 is compatible with Vue 3.x.
+> If you are looking for a Vue 2.x compatible version, check out [v2](https://github.com/kaidjohnson/redux-connect-vue/tree/v2.0.0-beta.1)
 
 A tiny Vue plugin that connects components with Redux.
 
 No HOCs. No complex API. No dependencies. Just use and go!
 
 - Simple: < 60 lines code.
-- Tiny: < 0.3 KB gzipped.
+- Tiny: < 0.4 KB gzipped.
 - Flexible: Configurable api via Vue plugin options.
 
 New to Redux? [Start Here](https://redux.js.org/introduction/getting-started)
