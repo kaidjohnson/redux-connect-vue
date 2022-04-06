@@ -27,7 +27,7 @@
   "bugs": "https://github.com/kaidjohnson/redux-connect-vue/issues",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "7.17.8",
+    "@babel/core": "7.17.9",
     "@babel/preset-env": "7.16.11",
     "@size-limit/preset-small-lib": "7.0.8",
     "@vue/test-utils": "2.0.0-rc.19",
